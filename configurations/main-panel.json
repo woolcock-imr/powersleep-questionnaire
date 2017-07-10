@@ -9,7 +9,7 @@
 		{
 		   "module_id" : "participant_login_setup",
 		   "table_id":"20010811",
-		   "url" : "https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/participant_login_setup.html"
+		   "url" : "https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/participant_login_setup.html"
 		}
 		,{
 		   "module_id" : "questionnaire",
@@ -31,14 +31,14 @@
 								"module_id":"participant",
 								"name":"Participant",
 								"table_id":"20010809",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/participant.html",
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/participant.html",
 								"counting":"1"
 							}
 							,{
 								"module_id":"task_notes",
 								"name":"Notes",
 								"table_id":"20010810",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task_notes.html",
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task_notes.html",
 								"counting":"1"
 							}
 						]
@@ -56,7 +56,7 @@
 								"module_id":"consent",
 								"name":"Consent",
 								"table_id":"20010780",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/consent.html",
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/consent.html",
 								"counting":"1",
 								"quest":"1",
 								"form_module":"consent_form"
@@ -64,13 +64,13 @@
 							,{
 								"module_id":"consent_form",
 								"table_id":"20010780",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/consent.form.html"
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/consent.form.html"
 							}
 							,{
 								"module_id":"bk",
 								"name":"Background Information",
 								"table_id":"20010781",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/under_construction.html",
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/under_construction.html",
 								"counting":"1",
 								"quest":"1",
 								"form_module":"bk_form"
@@ -78,13 +78,13 @@
 							,{
 								"module_id":"bk_form",
 								"table_id":"20010781",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/under_construction.form.html"
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/under_construction.form.html"
 							}
 							,{
 								"module_id":"general",
 								"name":"General",
 								"table_id":"20010782",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/under_construction.html",
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/under_construction.html",
 								"counting":"1",
 								"quest":"1",
 								"form_module":"general_form"
@@ -92,7 +92,7 @@
 							,{
 								"module_id":"general_form",
 								"table_id":"20010782",
-								"url":"https://woolcock-imr.github.io/modules/powersleep-recruitment-questionnaire-management/task/under_construction.form.html"
+								"url":"https://woolcock-imr.github.io/powersleep-recruitment-questionnaire/modules-management/task/under_construction.form.html"
 							}
 						]
 					}

@@ -1,0 +1,200 @@
+
+<section>
+    <div class=C__ID__s>
+        <p></p>
+        <input id=username__ID placeholder="Username" class=C__ID__input />
+        <br><input id=password__ID placeholder="Password" class=C__ID__input type=password />
+        <br><span id="ErrMsg__ID"></span>
+        <br><input id=signin__ID type=button value='Sign in' class=C__ID__button />
+        <br>
+    </div>
+</section>
+<script>
+    function F__ID(){
+		//-----------------------------------------------
+		var _mlist=$vm.module_list;
+		var _mobj=$vm.vm['__ID'];
+		var _sys=_mobj.op.sys;
+		var _module=$vm.module_list[_mobj.name];
+		//-----------------------------------------------
+		var search=window.location.search
+		if(search.indexOf('username=')!=-1){
+			var txt=search.split('username=')[1];
+			var username=txt.split('&')[0];
+			$('#username__ID').val(username);
+		}
+		if(search.indexOf('password=')!=-1){
+			var txt=search.split('password=')[1];
+			var password=txt.split('&')[0];
+			$('#password__ID').val(password);
+		}
+		//-----------------------------------------------
+        $('#signin__ID').on('click',function(){
+            $('#ErrMsg__ID').text("");
+            var username=$('#username__ID').val();
+            var password=$('#password__ID').val();
+
+ 			//if(username==="") username="1-20009728";
+ 			//if(password==="") password="ZEGPAJan";
+
+            var a=username.split('-');
+            if(a.length!=2){
+                $('#ErrMsg__ID').text("Invalid participant login ID or password.")
+                return;
+            }
+            var participant_uid=a[0];
+            var login_setup_tid=a[1];
+			var url=_mobj.op.task_panel_config_url;
+			//alert(url)
+			//----------------------------------------------------------------------
+			$VmAPI.request({data:{cmd:'participant_signin_v2',username:username,password:password,json:"1"},callback:function(res){
+                if(res.ret=="1"){
+                    $vm.online_questionnaire=1;
+                    $vm.user=username;
+                    $vm.user_id=res.user_id;
+                    $VmAPI.set_token(res.token,'');
+                    $vm.signout_obj.show();
+                    $vm.username_obj.text('Login as '+ $vm.user);
+                    var participant=res.S1; if(participant==="") participant=participant_uid;
+					var task_list=res.List;
+					/*
+                    $vm.load_module_by_name('data_entry_module',$vm.root_layout_content_slot,{
+                        participant_uid:participant_uid,
+                        participant:participant,
+                        participant_username:username,
+                        task_list:res.List,
+                    });
+					*/
+					load_project_panel(url,participant_uid,login_setup_tid,participant,task_list);
+                }
+                else{
+                    $('#ErrMsg__ID').text("Invalid participant login ID or password.")
+                }
+            }})
+			//url="https://vmiis.github.io/configurations/control_panel/test.json";
+    	});
+		//-----------------------------------------------
+		var load_project_panel=function(url,participant_uid,login_setup_tid,participant,task_list){
+			if(url==""){
+				alert('No project main panel configuration');
+				return;
+			}
+			url+='?_v='+$vm.version+$vm.reload;
+			url=$vm.url(url);
+			$.get(url,function(txt){
+				var text=$('<div/>').html(txt).text();
+				//---------------------------
+				var config;
+				try{
+					config=JSON.parse(text);
+				}
+				catch (e){
+					alert("Error in app config file\n"+e);
+					return;
+				}
+				var	panel_url=config.url;
+				//---------------------------
+				var module="L_0";
+				if($vm.module_list[module]==undefined){
+					$vm.module_list[module]={
+						url:panel_url,
+						var:{},
+					}
+				}
+				//---------------------------
+				_sys={
+					config:config,
+					UID:0,
+				}
+				var op={
+					name:'',
+					mobj:_mobj,
+					record:{UID:0},
+					sys:_sys
+				}
+				$vm.load_module_by_name(module,undefined,op,function(){
+					load_quest_panel(participant_uid,login_setup_tid,participant,task_list);
+				});
+				//---------------------------
+			},'text').fail(function() {
+				alert( "The file '"+url+"' doesn't exist!" );
+			});
+			//----------------------------------------------------------------------
+		}
+		//-----------------------------------------------
+		var load_quest_panel=function(participant_uid,login_setup_tid,participant,task_list){
+			var op={
+				//------------------------
+				mobj:_mobj,
+				sys:_sys,
+				//------------------------
+				participant_uid:participant_uid,
+				participant:participant,
+				participant_username:participant_uid+"-"+login_setup_tid,
+				task_list:task_list,
+				//------------------------
+			}
+			_mlist['questionnaire']={url:$vm.app_config.modules.questionnaire.url,var:{}}
+			$vm.load_module_by_name('questionnaire',$vm.root_layout_content_slot,op)
+		}
+		//-----------------------------------------------
+    }
+</script>
+<style>
+    .C__ID__s{
+        font: 18pt "Arial";
+        padding:80px;
+    }
+    @media all and (max-width: 480px){
+    	.C__ID__s{
+        	padding-left:20px;
+    	}
+    }
+    .C__ID__input{
+        height: 34px;
+        width:260px;
+        color: #555;
+        adisplay: inline-block;
+        padding: 1px 6px;
+        font-size: 10pt;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        margin-bottom: 0;
+    }
+    .C__ID__button {
+        margin:16px 0;
+        -webkit-appearance: button;
+        cursor: pointer;
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .C__ID__button:hover{
+        background-color: #3276b1;
+        border-color: #285e8e;
+    }
+    .C__ID__s *{
+        margin: 6px 0;
+    }
+    .C__ID__s span{
+        color:#FF0000;
+        font: 12pt "Arial";
+    }
+    .C__ID__s u{
+    	cursor:pointer;
+        font: 12pt "Arial";
+    }
+</style>
